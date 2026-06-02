@@ -1,0 +1,435 @@
+/* 1. POLICES (charte officielle Manga Paradise) */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;1,800&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+
+/* 2. TAILWIND */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Manga Paradise — "Pop Sanctuary" Design System (HSL)
+   Direction artistique officielle (charte 2026).
+   - Primary cinabre #DC1E44
+   - Accents chauds corail / orange
+   - Backgrounds clairs sky / paper / cloud / sand
+   - Texte ink #334155
+   - Pro/Admin : variante mp-night disciplinée
+   ============================================================ */
+
+@layer base {
+  :root {
+    /* === Brand === */
+    --mp-primary: 348 75% 49%;          /* #DC1E44 */
+    --mp-primary-600: 347 78% 41%;      /* hover */
+    --mp-primary-50: 348 75% 95%;       /* fond tag */
+    --mp-coral: 0 85% 64%;              /* #F25353 */
+    --mp-orange: 19 92% 66%;            /* #F7945B */
+    --mp-saffron: 42 100% 68%;          /* #FFD15B */
+
+    /* === Backgrounds clairs === */
+    --mp-paper: 212 100% 98%;           /* #F8FBFF */
+    --mp-cloud: 213 100% 95%;           /* #E8F2FF */
+    --mp-sky: 213 100% 86%;             /* #B9DBFF */
+    --mp-sand: 38 100% 96%;             /* #FFF7ED */
+
+    /* === Texte === */
+    --mp-ink: 215 25% 27%;              /* #334155 */
+    --mp-ink-soft: 215 19% 35%;         /* #475569 */
+    --mp-ink-muted: 215 16% 47%;        /* #64748B */
+    --mp-ink-disabled: 215 20% 65%;     /* #94A3B8 */
+
+    /* === Pro / Admin / Footer === */
+    --mp-night: 217 51% 12%;            /* #0F1B2D */
+    --mp-night-card: 224 42% 18%;
+    --mp-night-border: 222 33% 25%;
+
+    /* === Sémantique === */
+    --mp-success: 142 71% 36%;
+    --mp-warning: 21 90% 48%;
+    --mp-danger: 0 72% 51%;
+    --mp-info: 199 89% 48%;
+    --mp-violet: 262 83% 58%;           /* associations partenaires */
+
+    /* === Mapping shadcn === */
+    --background: var(--mp-paper);
+    --foreground: var(--mp-ink);
+
+    --card: 0 0% 100%;
+    --card-foreground: var(--mp-ink);
+
+    --popover: 0 0% 100%;
+    --popover-foreground: var(--mp-ink);
+
+    --primary: var(--mp-primary);
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 215 16% 95%;
+    --secondary-foreground: var(--mp-ink);
+
+    --muted: 215 16% 95%;
+    --muted-foreground: var(--mp-ink-muted);
+
+    --accent: var(--mp-orange);
+    --accent-foreground: 21 90% 18%;
+
+    --destructive: var(--mp-danger);
+    --destructive-foreground: 0 0% 100%;
+
+    --success: var(--mp-success);
+    --success-foreground: 0 0% 100%;
+
+    --border: 215 16% 90%;              /* #E2E8F0 */
+    --input: 215 16% 84%;                /* #CBD5E1 */
+    --ring: var(--mp-primary);
+
+    --radius: 1rem;                      /* 16 px → cards par défaut */
+
+    /* === Header === */
+    --header-bg: 0 0% 100%;
+    --header-glass: 0 0% 100%;
+
+    /* === Couleurs additionnelles utilisées par le legacy
+       (compat sans casse — pointent vers la charte) === */
+    --sakura: var(--mp-primary);
+    --turquoise: var(--mp-cloud);
+    --tokyo-night: var(--mp-night);
+    --electric-yellow: var(--mp-saffron);
+    --otk: var(--mp-primary);
+
+    /* === Sidebar shadcn === */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: var(--mp-ink);
+    --sidebar-primary: var(--mp-primary);
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 16% 95%;
+    --sidebar-accent-foreground: var(--mp-ink);
+    --sidebar-border: 215 16% 90%;
+    --sidebar-ring: var(--mp-primary);
+
+    /* === Gradients officiels charte === */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--mp-primary)) 0%, hsl(var(--mp-coral)) 50%, hsl(var(--mp-orange)) 100%);
+    --gradient-sky: linear-gradient(180deg, hsl(var(--mp-sky)) 0%, hsl(var(--mp-paper)) 100%);
+    --gradient-warm: linear-gradient(135deg, hsl(var(--mp-coral)) 0%, hsl(var(--mp-orange)) 100%);
+    --gradient-cta: linear-gradient(90deg, hsl(var(--mp-primary)) 0%, hsl(var(--mp-coral)) 100%);
+    --gradient-card: linear-gradient(180deg, #ffffff 0%, hsl(var(--mp-cloud)) 100%);
+    --gradient-sakura: linear-gradient(135deg, hsl(var(--mp-primary)) 0%, hsl(var(--mp-coral)) 100%);
+    --gradient-neon: var(--gradient-hero);
+    --gradient-shine: linear-gradient(90deg, transparent 0%, hsl(0 0% 100% / 0.4) 50%, transparent 100%);
+
+    /* === Ombres charte (clean, pas de glow) === */
+    --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+    --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(15, 23, 42, 0.04);
+    --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.08);
+    --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.12);
+    --shadow-primary: 0 8px 24px rgba(220, 30, 68, 0.25);
+    --shadow-primary-lg: 0 12px 32px rgba(220, 30, 68, 0.30);
+    /* legacy aliases */
+    --shadow-glow: var(--shadow-primary);
+    --shadow-glow-yellow: 0 4px 16px rgba(247, 148, 91, 0.30);
+    --shadow-neon: var(--shadow-primary-lg);
+
+    /* === Transitions === */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* === Manga Ink (legacy noir/blanc) — apaisé === */
+    --manga-bg: var(--mp-paper);
+    --manga-ink: var(--mp-ink);
+    --manga-paper: 0 0% 100%;
+    --manga-dot: 215 16% 90%;
+
+    /* === Partner Portal — variante pro charte === */
+    --partner-bg: var(--mp-night);
+    --partner-sidebar: var(--mp-night-card);
+    --partner-card: var(--mp-night-card);
+    --partner-border: var(--mp-night-border);
+    --partner-gold: var(--mp-primary);
+    --partner-cyan: var(--mp-info);
+    --partner-muted: 215 20% 65%;
+    --partner-input: var(--mp-night-card);
+    --partner-input-border: var(--mp-night-border);
+  }
+
+  /* Mode sombre (option utilisateur — plus le défaut) */
+  .dark {
+    --background: var(--mp-night);
+    --foreground: 0 0% 98%;
+
+    --card: var(--mp-night-card);
+    --card-foreground: 0 0% 98%;
+
+    --popover: var(--mp-night-card);
+    --popover-foreground: 0 0% 98%;
+
+    --primary: var(--mp-primary);
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: var(--mp-night-card);
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: var(--mp-night-card);
+    --muted-foreground: 215 20% 65%;
+
+    --accent: var(--mp-orange);
+    --accent-foreground: 21 90% 12%;
+
+    --destructive: var(--mp-danger);
+    --destructive-foreground: 0 0% 100%;
+
+    --border: var(--mp-night-border);
+    --input: var(--mp-night-border);
+    --ring: var(--mp-primary);
+
+    --sidebar-background: var(--mp-night);
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: var(--mp-primary);
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: var(--mp-night-card);
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: var(--mp-night-border);
+    --sidebar-ring: var(--mp-primary);
+  }
+}
+
+/* ============================================================
+   Composants utilitaires charte
+   ============================================================ */
+@layer components {
+  .mp-card {
+    @apply bg-white border border-border rounded-2xl shadow-sm transition-all duration-200;
+  }
+  .mp-card-hover {
+    @apply hover:border-primary/25 hover:shadow-md hover:-translate-y-0.5;
+  }
+  .mp-section-warm {
+    background: hsl(var(--mp-sand));
+  }
+  .mp-section-sky {
+    background: var(--gradient-sky);
+  }
+  .mp-cta-band {
+    background: var(--gradient-cta);
+    @apply text-white;
+  }
+  .mp-headline {
+    font-family: 'Barlow Condensed', 'Impact', sans-serif;
+    font-weight: 800;
+    font-style: italic;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+
+  /* Partner Portal (Pro variant) */
+  .partner-input {
+    @apply bg-[hsl(var(--mp-night-card))] border-[hsl(var(--mp-night-border))] text-white placeholder:text-slate-500;
+    @apply focus:border-primary focus:ring-1 focus:ring-primary/40;
+  }
+  .partner-card {
+    @apply bg-[hsl(var(--mp-night-card))] border border-[hsl(var(--mp-night-border))] rounded-xl;
+  }
+  .partner-card-hover {
+    @apply hover:border-primary/40 transition-all duration-200;
+  }
+}
+
+/* ============================================================
+   Base globale
+   ============================================================ */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* BetaGate : exception fond sombre charte */
+  .beta-gate-root {
+    background-color: hsl(var(--mp-night)) !important;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Barlow Condensed', 'Impact', sans-serif;
+    font-weight: 800;
+    font-style: italic;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+  h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+  }
+}
+
+/* ============================================================
+   Utilitaires charte
+   ============================================================ */
+@layer utilities {
+  .text-ink { color: hsl(var(--mp-ink)); }
+  .text-ink-soft { color: hsl(var(--mp-ink-soft)); }
+  .text-ink-muted { color: hsl(var(--mp-ink-muted)); }
+
+  .bg-paper { background-color: hsl(var(--mp-paper)); }
+  .bg-sky { background-color: hsl(var(--mp-sky)); }
+  .bg-cloud { background-color: hsl(var(--mp-cloud)); }
+  .bg-sand { background-color: hsl(var(--mp-sand)); }
+
+  .ring-primary-soft {
+    box-shadow: 0 0 0 4px hsl(var(--mp-primary) / 0.12);
+  }
+
+  /* Aliases legacy (préservés pour compat code restant) */
+  .text-glow {
+    text-shadow: 0 1px 2px hsl(var(--mp-primary) / 0.2);
+  }
+  .text-glow-yellow {
+    text-shadow: 0 1px 2px hsl(var(--mp-orange) / 0.25);
+  }
+  .glow-card {
+    box-shadow: var(--shadow-md);
+  }
+  .neon-border {
+    box-shadow: 0 0 0 1px hsl(var(--mp-primary) / 0.25);
+  }
+
+  /* Manga Ink legacy (apaisé sur charte) */
+  .manga-halftone {
+    background-color: hsl(var(--manga-bg));
+    background-image: radial-gradient(hsl(var(--manga-dot)) 1px, transparent 1px);
+    background-size: 4px 4px;
+  }
+  .manga-bubble {
+    @apply bg-primary text-white font-bold uppercase tracking-wider;
+    @apply border-2 border-primary rounded-lg;
+    @apply transition-all duration-150;
+  }
+  .manga-bubble:hover {
+    @apply bg-white text-primary;
+  }
+  .manga-link {
+    @apply font-semibold uppercase tracking-wider text-ink;
+    @apply transition-all duration-150 relative;
+  }
+  .manga-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-[2px] bg-primary;
+    @apply transition-all duration-200;
+  }
+  .manga-link:hover::after {
+    @apply w-full;
+  }
+  .manga-link:hover {
+    color: hsl(var(--mp-primary));
+  }
+  .manga-link-invert:hover {
+    @apply bg-primary text-white;
+  }
+
+  /* Scrollbar-hide */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ============================================================
+   Inputs : style charte (sans !important agressif)
+   On garde un fallback pour les inputs non-shadcn historiques.
+   ============================================================ */
+@layer base {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="number"],
+  input[type="date"],
+  input[type="time"],
+  input[type="datetime-local"],
+  input[type="week"],
+  input[type="month"],
+  input[type="color"],
+  textarea,
+  select {
+    color: hsl(var(--mp-ink));
+    background-color: #ffffff;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: hsl(var(--mp-ink-muted));
+  }
+
+  /* Exception BetaGate */
+  .beta-gate-root input[type="password"] {
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.06) !important;
+  }
+  .beta-gate-root input[type="password"]::placeholder {
+    color: #94a3b8 !important;
+  }
+
+  /* Exception partenaire pro (fond sombre disciplined) */
+  .partner-input,
+  .partner-input input,
+  .partner-input textarea {
+    color: #ffffff;
+    background-color: hsl(var(--mp-night-card));
+  }
+}
+
+/* ============================================================
+   Animations (purgées des effets cyberpunk excessifs)
+   ============================================================ */
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes gentle-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.05); opacity: 0.7; }
+}
+
+@keyframes ping-orange {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+  100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+}
+
+@keyframes tap-ripple {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0.5; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+}
+
+@keyframes sakura-fall {
+  0% { transform: translateY(-10%) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.5; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
