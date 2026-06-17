@@ -1,32 +1,44 @@
-# Dependencies
-node_modules
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Build outputs
-dist
-dist-ssr
-*.local
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
 
-# macOS System Files (PROTECTION)
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
 .DS_Store
-Icon?
-._*
+*.pem
 
-# Environment
-.env.local
-.env.*.local
-
-# Editor
-.vscode/*
-!.vscode/extensions.json
-.idea
-
-# Logs
-logs
-*.log
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-MonAppMobile/
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Claude Code (local)
 .claude/
