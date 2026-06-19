@@ -9,9 +9,10 @@ Documentation vivante de la reconstruction. Toute décision structurante est tra
 - [conventions.md](conventions.md) — standards de code et de qualité
 - [design-system.md](design-system.md) — charte graphique « Pop Sanctuary », tokens, typographie
 - [rbac.md](rbac.md) — modèle de rôles et autorisations (source unique)
+- [data-model.md](data-model.md) — schéma de données & migrations
+- [features/](features/) — **fiches par domaine** (audit du legacy + plan de portage : écrans → routes, tables, hooks, doublons, stubs)
 - [adr/](adr/) — Architecture Decision Records
 
 ## Voir aussi
 
-- [`../REBUILD_PLAN.md`](../REBUILD_PLAN.md) — plan de reconstruction (stack, périmètre, ordre de construction)
-- `../legacy/` — ancienne application (référence pendant le portage, supprimée en fin de chantier)
+- [`../RE

@@ -42,3 +42,7 @@ next-env.d.ts
 
 # Claude Code (local)
 .claude/
+
+# Supabase CLI (état local)
+supabase/.temp
+supabase/.branches

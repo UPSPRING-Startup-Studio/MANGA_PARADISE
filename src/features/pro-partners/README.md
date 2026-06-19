@@ -1,15 +1,9 @@
 # Feature : pro-partners
 
-> Domaine métier `pro-partners`. À compléter lors de la construction (voir REBUILD_PLAN.md §9).
+Espace partenaire pro (équipe, structure, événements, candidatures) — consolidé depuis l'ancien portail Partner.
 
-## Périmètre
-_À rédiger._
+> 📋 **Spécification détaillée** (audit du legacy + plan de portage : écrans, routes, tables, hooks, doublons, stubs, points d'attention) : [`docs/features/pro-partners.md`](../../../docs/features/pro-partners.md).
 
-## Routes
-_À rédiger._
+## Structure
 
-## Tables Supabase
-_À rédiger._
-
-## Notes / points d'attention
-_À rédiger._
+Ce dossier porte le code de la feature : `components/`, `hooks/`, `api/` (seul accès Supabase), `schemas.ts`, `server.ts`, `actions.ts` selon les besoins. Voir [`docs/architecture.md`](../../../docs/architecture.md).

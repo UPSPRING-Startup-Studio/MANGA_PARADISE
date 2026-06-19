@@ -20,37 +20,37 @@ Principes directeurs :
 
 ### Décisions actées (2026-06-17)
 
-| Décision | Choix |
-|---|---|
-| Framework frontend | **Next.js (App Router)** + React + TypeScript |
+| Décision               | Choix                                                                                       |
+| ---------------------- | ------------------------------------------------------------------------------------------- |
+| Framework frontend     | **Next.js (App Router)** + React + TypeScript                                               |
 | Mode de reconstruction | **Complète avant mise en ligne** (pas d'échelonnement public) — qualité et doc prioritaires |
-| Doublons & stubs | **Consolider** : fusionner les redondances, finir ou cadrer les stubs |
-| Hébergement | **Vercel + Supabase**, nouveau compte |
-| Données | **Aucune migration** — repartir vide ; le schéma actuel sert de **cahier des charges** |
+| Doublons & stubs       | **Consolider** : fusionner les redondances, finir ou cadrer les stubs                       |
+| Hébergement            | **Vercel + Supabase**, nouveau compte                                                       |
+| Données                | **Aucune migration** — repartir vide ; le schéma actuel sert de **cahier des charges**      |
 
 ---
 
 ## 2. Stack cible
 
-| Couche | Choix | Notes |
-|---|---|---|
-| Framework | **Next.js 16 (App Router)** | SSR pour pages publiques (SEO fiches asso/événements), route handlers pour l'API |
-| Langage | **TypeScript strict** | `strict: true`, `noUncheckedIndexedAccess`, pas d'`any` |
-| UI | **Tailwind CSS + shadcn/ui** | Repris de l'existant, nettoyé et homogénéisé |
-| Données serveur | **React Server Components + Server Actions** | Lecture/mutation côté serveur quand pertinent |
-| Données client | **TanStack Query v5** | Interactif, temps réel, cache |
-| Supabase | **@supabase/ssr** | Clients server / client / middleware (auth par cookies) |
-| Auth | **Supabase Auth natif** | Email/password + OAuth Google/Apple — **on supprime `@lovable.dev/cloud-auth-js`** |
-| Autorisation | **RLS + `user_roles` + 1 hook/guard** | Source unique (voir §8) |
-| Migrations | **Supabase CLI** | `supabase/migrations`, types générés, plus de SQL manuel |
-| Formulaires | **react-hook-form + zod** | Schémas zod partagés client/serveur |
-| Drag & drop | **dnd-kit** | Form builder, kanban cosplay, lineups, ordre de passage |
-| Cartes | **Leaflet** (import dynamique client-only) | Isolé dans un seul module |
-| Graphiques | **Recharts** (lazy) | Dashboards admin/asso |
-| Animations | **framer-motion** (`motion`) | Usage mesuré |
-| Tests | **Vitest** (unit) + **Playwright** (e2e) | Flux critiques couverts |
-| Gestionnaire de paquets | **npm** | Standard, déjà disponible sur le poste |
-| Qualité | **ESLint + Prettier + Husky + lint-staged** | Pré-commit obligatoire |
+| Couche                  | Choix                                        | Notes                                                                              |
+| ----------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Framework               | **Next.js 16 (App Router)**                  | SSR pour pages publiques (SEO fiches asso/événements), route handlers pour l'API   |
+| Langage                 | **TypeScript strict**                        | `strict: true`, `noUncheckedIndexedAccess`, pas d'`any`                            |
+| UI                      | **Tailwind CSS + shadcn/ui**                 | Repris de l'existant, nettoyé et homogénéisé                                       |
+| Données serveur         | **React Server Components + Server Actions** | Lecture/mutation côté serveur quand pertinent                                      |
+| Données client          | **TanStack Query v5**                        | Interactif, temps réel, cache                                                      |
+| Supabase                | **@supabase/ssr**                            | Clients server / client / middleware (auth par cookies)                            |
+| Auth                    | **Supabase Auth natif**                      | Email/password + OAuth Google/Apple — **on supprime `@lovable.dev/cloud-auth-js`** |
+| Autorisation            | **RLS + `user_roles` + 1 hook/guard**        | Source unique (voir §8)                                                            |
+| Migrations              | **Supabase CLI**                             | `supabase/migrations`, types générés, plus de SQL manuel                           |
+| Formulaires             | **react-hook-form + zod**                    | Schémas zod partagés client/serveur                                                |
+| Drag & drop             | **dnd-kit**                                  | Form builder, kanban cosplay, lineups, ordre de passage                            |
+| Cartes                  | **Leaflet** (import dynamique client-only)   | Isolé dans un seul module                                                          |
+| Graphiques              | **Recharts** (lazy)                          | Dashboards admin/asso                                                              |
+| Animations              | **framer-motion** (`motion`)                 | Usage mesuré                                                                       |
+| Tests                   | **Vitest** (unit) + **Playwright** (e2e)     | Flux critiques couverts                                                            |
+| Gestionnaire de paquets | **npm**                                      | Standard, déjà disponible sur le poste                                             |
+| Qualité                 | **ESLint + Prettier + Husky + lint-staged**  | Pré-commit obligatoire                                                             |
 
 ### Dépendances supprimées / à ne pas reprendre
 
@@ -165,11 +165,13 @@ docs/
 ## 7. Authentification & RBAC (source unique)
 
 **Auth** : Supabase Auth.
+
 - Email/password + OAuth Google/Apple **natif Supabase** (`signInWithOAuth`).
 - `middleware.ts` rafraîchit la session (cookies) et protège les groupes de routes.
 - Reprise du bon pattern de l'ancien `AuthContext` adapté App Router.
 
 **Autorisation** — fin des 2 systèmes concurrents et des 16 rôles en dur dispersés sur 51 fichiers :
+
 - **Rôles globaux** dans `user_roles` (enum `app_role`).
 - **Rôles contextuels** dans les tables d'appartenance (`association_memberships.role`, `pro_partner_members.role`).
 - **RLS = rempart d'autorisation** (la base refuse, le front ne fait qu'afficher/masquer).
@@ -184,17 +186,17 @@ docs/
 
 Décision « Consolider » appliquée :
 
-| Élément existant | Action |
-|---|---|
-| Portail **Partner legacy** (`/partner-portal/*`, `components/partner*`) | **Supprimé**, fusionné dans **Pro Partner** (`/pro/*`) |
-| `/feed` (CosFeed) vs `/communaute/feed` (CommunityFeed) | **Un seul feed** avec filtres |
-| `/agenda` vs `/agenda/associations` | **Un seul agenda** |
-| `/communaute/bazar` vs `/boutique` | **Une seule boutique** |
-| `/guilds` vs `/communaute/guilds` | **Un chemin canonique** + redirection |
-| `CosplayShowcase`, `CosplayProjectDashboard` (déjà redirigées) | **Supprimées**, tout dans le Cosplay Hub |
-| Données mock (events/intérêts espace membre, XP mensuel simulé `% 500`) | **Vraies données** (colonnes dédiées) |
+| Élément existant                                                                 | Action                                                                                       |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Portail **Partner legacy** (`/partner-portal/*`, `components/partner*`)          | **Supprimé**, fusionné dans **Pro Partner** (`/pro/*`)                                       |
+| `/feed` (CosFeed) vs `/communaute/feed` (CommunityFeed)                          | **Un seul feed** avec filtres                                                                |
+| `/agenda` vs `/agenda/associations`                                              | **Un seul agenda**                                                                           |
+| `/communaute/bazar` vs `/boutique`                                               | **Une seule boutique**                                                                       |
+| `/guilds` vs `/communaute/guilds`                                                | **Un chemin canonique** + redirection                                                        |
+| `CosplayShowcase`, `CosplayProjectDashboard` (déjà redirigées)                   | **Supprimées**, tout dans le Cosplay Hub                                                     |
+| Données mock (events/intérêts espace membre, XP mensuel simulé `% 500`)          | **Vraies données** (colonnes dédiées)                                                        |
 | Stubs : documents asso, contacts asso, demandes pro, mission schema configurator | **À cadrer puis implémenter** (ce ne sont pas des fonctionnalités existantes — placeholders) |
-| Admin « Database viewer » | Conservé mais **strictement sécurisé** |
+| Admin « Database viewer »                                                        | Conservé mais **strictement sécurisé**                                                       |
 
 > ⚠️ « Conserver toutes les fonctionnalités » = toutes les fonctionnalités **réelles**. Les pages-stubs n'ont aujourd'hui aucune logique : elles seront spécifiées avant d'être construites (mini-specs dans `docs/features/`).
 

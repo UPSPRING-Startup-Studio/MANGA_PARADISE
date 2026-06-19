@@ -38,7 +38,4 @@ legacy/                  # ancienne app (référence, temporaire)
 - **Interaction client / temps réel** : TanStack Query via `lib/supabase/client.ts`.
 - **Mutations** : Server Actions ou route handlers ; les secrets restent côté serveur.
 - **Sécurité** : la RLS Supabase est le rempart ; le front ne fait qu'afficher/masquer.
-
-## Authentification
-
-Supabase Auth (email/password + OAuth natif). Le middleware rafraîchit la session à chaque requête (cookies). Voir [rbac.md](rbac.md).
+- **Logique métier dans la base** : contraintes de schéma + RLS + fonctions/RPC Postgres, et Edge Functions pour le code applicatif. Les Server Actions resten

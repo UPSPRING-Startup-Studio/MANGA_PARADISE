@@ -3,3 +3,8 @@ node_modules
 legacy
 public
 package-lock.json
+
+# Fichier généré par Supabase CLI
+src/types/database.ts
+supabase/.temp
+supabase/.branches

@@ -16,24 +16,24 @@ npm run dev                  # http://localhost:3000
 
 ## Variables d'environnement
 
-| Variable | Portée | Description |
-|---|---|---|
-| `NEXT_PUBLIC_SUPABASE_URL` | client + serveur | URL du projet Supabase |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | client + serveur | Clé publique (anon) — sécurité via RLS |
-| `SUPABASE_SERVICE_ROLE_KEY` | serveur uniquement | Clé admin — **jamais** exposée au client ni committée |
+| Variable                        | Portée             | Description                                           |
+| ------------------------------- | ------------------ | ----------------------------------------------------- |
+| `NEXT_PUBLIC_SUPABASE_URL`      | client + serveur   | URL du projet Supabase                                |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | client + serveur   | Clé publique (anon) — sécurité via RLS                |
+| `SUPABASE_SERVICE_ROLE_KEY`     | serveur uniquement | Clé admin — **jamais** exposée au client ni committée |
 
 > Tant que `NEXT_PUBLIC_SUPABASE_*` ne sont pas renseignées, le middleware laisse passer les requêtes (pas d'auth active).
 
 ## Scripts
 
-| Script | Rôle |
-|---|---|
-| `npm run dev` | serveur de développement (Turbopack) |
-| `npm run build` | build de production |
-| `npm run start` | serveur de production |
-| `npm run lint` | ESLint |
+| Script              | Rôle                                     |
+| ------------------- | ---------------------------------------- |
+| `npm run dev`       | serveur de développement (Turbopack)     |
+| `npm run build`     | build de production                      |
+| `npm run start`     | serveur de production                    |
+| `npm run lint`      | ESLint                                   |
 | `npm run typecheck` | vérification TypeScript (`tsc --noEmit`) |
-| `npm run format` | formatage Prettier |
+| `npm run format`    | formatage Prettier                       |
 
 ## Déploiement (Vercel)
 

@@ -24,13 +24,6 @@
 - Prettier (config `.prettierrc.json`) + `prettier-plugin-tailwindcss` (tri des classes).
 - Couleurs via tokens du design system uniquement (voir [design-system.md](design-system.md)), jamais de couleur en dur.
 
-## Git
+## Mobile-first (exigence forte)
 
-- Commits avec emoji : ✨ feature · 🐛 bug · 🔥 suppression · 🎨 refactor · 📝 doc · 🚧 WIP.
-- Branches : `DEVELOPMENT` → `staging` → `main` (via PR).
-
-## Qualité avant commit
-
-```bash
-npm run typecheck && npm run lint && npm run format:check
-```
+Chaque écran doit être **irréprochable sur mobile**. On conçoit mobile-first : styles de base = mobile, puis `sm:`/`md:`/`lg:`. Règles : navigation repliée en menu sous `md` ; grilles en 1 colonne sur mobile (`grid-cols-1 sm:grid-cols-2

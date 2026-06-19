@@ -1,15 +1,9 @@
 # Feature : auth
 
-> Domaine métier `auth`. À compléter lors de la construction (voir REBUILD_PLAN.md §9).
+Authentification (email + OAuth Google), confirmation, déconnexion, orientation initiale.
 
-## Périmètre
-_À rédiger._
+> 📋 **Spécification détaillée** (audit du legacy + plan de portage : écrans, routes, tables, hooks, doublons, stubs, points d'attention) : [`docs/features/auth.md`](../../../docs/features/auth.md).
 
-## Routes
-_À rédiger._
+## Structure
 
-## Tables Supabase
-_À rédiger._
-
-## Notes / points d'attention
-_À rédiger._
+Ce dossier porte le code de la feature : `components/`, `hooks/`, `api/` (seul accès Supabase), `schemas.ts`, `server.ts`, `actions.ts` selon les besoins. Voir [`docs/architecture.md`](../../../docs/architecture.md).

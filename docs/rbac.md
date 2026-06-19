@@ -11,16 +11,13 @@
 3. **Un seul point d'accès côté app** :
    - `src/lib/rbac.ts` — helpers purs (a-t-il tel rôle ?).
    - `useRole()` (client) + gardes serveur (Server Components / route handlers).
-   - Garde de routes centralisée dans `src/middleware.ts`.
+   - Garde de routes centralisée dans `src/proxy.ts` (Next 16 : la convention `middleware` est renommée `proxy`) qui délègue à `lib/supabase/middleware.ts`.
 4. **Jamais** de vérification de rôle ad hoc dispersée dans les composants.
 
 ## Helpers RLS (repris de l'existant, à recréer proprement)
 
 `is_association_admin`, `is_association_leader`, `is_association_member`, `is_association_writable`, `is_pro_partner_admin`, `has_role`… (voir `legacy/supabase/migrations/`).
 
-## À implémenter (Étape 0/1)
+## État (Étape 0/1)
 
-- [ ] `lib/rbac.ts` + types de rôles
-- [ ] `useRole()` et gardes serveur
-- [ ] Protection des groupes de routes dans le middleware
-- [ ] (option) Auth Hook Supabase pour injecter les rôles dans le JWT
+- [x] `lib/rbac.ts` — types (`AppRole`, `Area`), helpers purs (`hasRole`, `hasAnyRole`, `isAdmin`, `isStaff`,
