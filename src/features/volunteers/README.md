@@ -1,0 +1,9 @@
+# Feature : volunteers
+
+Bénévolat : missions, créneaux/planning, candidatures, affectations, schéma de mission dynamique.
+
+> 📋 **Spécification détaillée** (audit du legacy + plan de portage : écrans, routes, tables, hooks, doublons, stubs, points d'attention) : [`docs/features/volunteers.md`](../../../docs/features/volunteers.md).
+
+## Structure
+
+Ce dossier porte le code de la feature : `components/`, `hooks/`, `api/` (seul accès Supabase), `schemas.ts`, `server.ts`, `actions.ts` selon les besoins. Voir [`docs/architecture.md`](../../../docs/architecture.md).

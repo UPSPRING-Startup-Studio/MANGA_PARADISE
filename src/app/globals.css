@@ -1,0 +1,193 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   Manga Paradise — Design System "Pop Sanctuary" (charte 2026)
+   - Primaire cinabre #DC1E44
+   - Accents chauds corail / orange / saffron
+   - Fonds clairs paper / cloud / sky / sand, texte ink
+   - Variante sombre "mp-night" (Pro / Admin)
+   Référence complète des utilitaires legacy : legacy/src/index.css
+   ============================================================ */
+
+@theme inline {
+  /* Couleurs sémantiques shadcn */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Couleurs de marque (utilitaires bg-mp-*, text-mp-*) */
+  --color-mp-primary: var(--mp-primary);
+  --color-mp-coral: var(--mp-coral);
+  --color-mp-orange: var(--mp-orange);
+  --color-mp-saffron: var(--mp-saffron);
+  --color-mp-ink: var(--mp-ink);
+  --color-mp-ink-soft: var(--mp-ink-soft);
+  --color-mp-ink-muted: var(--mp-ink-muted);
+  --color-mp-paper: var(--mp-paper);
+  --color-mp-cloud: var(--mp-cloud);
+  --color-mp-sky: var(--mp-sky);
+  --color-mp-sand: var(--mp-sand);
+  --color-mp-night: var(--mp-night);
+  --color-success: var(--mp-success);
+  --color-warning: var(--mp-warning);
+  --color-info: var(--mp-info);
+  --color-violet: var(--mp-violet);
+
+  /* Typographie */
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+  --font-mono: var(--font-mono);
+
+  /* Rayons */
+  --radius-sm: calc(var(--radius) - 8px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  /* === Marque (brand tokens) === */
+  --mp-primary: hsl(348 75% 49%); /* #DC1E44 */
+  --mp-primary-600: hsl(347 78% 41%);
+  --mp-coral: hsl(0 85% 64%); /* #F25353 */
+  --mp-orange: hsl(19 92% 66%); /* #F7945B */
+  --mp-saffron: hsl(42 100% 68%); /* #FFD15B */
+  --mp-paper: hsl(212 100% 98%); /* #F8FBFF */
+  --mp-cloud: hsl(213 100% 95%);
+  --mp-sky: hsl(213 100% 86%);
+  --mp-sand: hsl(38 100% 96%);
+  --mp-ink: hsl(215 25% 27%); /* #334155 */
+  --mp-ink-soft: hsl(215 19% 35%);
+  --mp-ink-muted: hsl(215 16% 47%);
+  --mp-night: hsl(217 51% 12%); /* #0F1B2D */
+  --mp-night-card: hsl(224 42% 18%);
+  --mp-night-border: hsl(222 33% 25%);
+  --mp-success: hsl(142 71% 36%);
+  --mp-warning: hsl(21 90% 48%);
+  --mp-danger: hsl(0 72% 51%);
+  --mp-info: hsl(199 89% 48%);
+  --mp-violet: hsl(262 83% 58%);
+
+  --radius: 1rem;
+
+  /* === Sémantique shadcn (clair) === */
+  --background: var(--mp-paper);
+  --foreground: var(--mp-ink);
+  --card: hsl(0 0% 100%);
+  --card-foreground: var(--mp-ink);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: var(--mp-ink);
+  --primary: var(--mp-primary);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(215 16% 95%);
+  --secondary-foreground: var(--mp-ink);
+  --muted: hsl(215 16% 95%);
+  --muted-foreground: var(--mp-ink-muted);
+  --accent: var(--mp-cloud);
+  --accent-foreground: var(--mp-ink);
+  --destructive: var(--mp-danger);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(215 16% 90%);
+  --input: hsl(215 16% 84%);
+  --ring: var(--mp-primary);
+  --chart-1: var(--mp-primary);
+  --chart-2: var(--mp-orange);
+  --chart-3: var(--mp-info);
+  --chart-4: var(--mp-violet);
+  --chart-5: var(--mp-saffron);
+  --sidebar: hsl(0 0% 100%);
+  --sidebar-foreground: var(--mp-ink);
+  --sidebar-primary: var(--mp-primary);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(215 16% 95%);
+  --sidebar-accent-foreground: var(--mp-ink);
+  --sidebar-border: hsl(215 16% 90%);
+  --sidebar-ring: var(--mp-primary);
+}
+
+.dark {
+  /* === Sémantique shadcn (sombre — mp-night) === */
+  --background: var(--mp-night);
+  --foreground: hsl(0 0% 98%);
+  --card: var(--mp-night-card);
+  --card-foreground: hsl(0 0% 98%);
+  --popover: var(--mp-night-card);
+  --popover-foreground: hsl(0 0% 98%);
+  --primary: var(--mp-primary);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: var(--mp-night-card);
+  --secondary-foreground: hsl(0 0% 98%);
+  --muted: var(--mp-night-card);
+  --muted-foreground: hsl(215 20% 65%);
+  --accent: var(--mp-night-border);
+  --accent-foreground: hsl(0 0% 98%);
+  --destructive: var(--mp-danger);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: var(--mp-night-border);
+  --input: var(--mp-night-border);
+  --ring: var(--mp-primary);
+  --chart-1: var(--mp-primary);
+  --chart-2: var(--mp-orange);
+  --chart-3: var(--mp-info);
+  --chart-4: var(--mp-violet);
+  --chart-5: var(--mp-saffron);
+  --sidebar: var(--mp-night);
+  --sidebar-foreground: hsl(0 0% 98%);
+  --sidebar-primary: var(--mp-primary);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: var(--mp-night-card);
+  --sidebar-accent-foreground: hsl(0 0% 98%);
+  --sidebar-border: var(--mp-night-border);
+  --sidebar-ring: var(--mp-primary);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading), "Impact", sans-serif;
+    font-weight: 800;
+    font-style: italic;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+}

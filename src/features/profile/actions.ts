@@ -1,0 +1,87 @@
+"use server";
+
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import {
+  updateProfileById,
+  updateProfilePrivateById,
+} from "@/features/profile/api/profiles";
+import {
+  onboardingSchema,
+  profileEditSchema,
+  type OnboardingInput,
+  type ProfileEditInput,
+} from "@/features/profile/schemas";
+
+/** Chaine vide -> null (colonnes nullable). */
+function nullify(v?: string): string | null {
+  const t = v?.trim();
+  return t ? t : null;
+}
+
+const UNIQUE_VIOLATION = "23505";
+
+export async function completeOnboarding(
+  values: OnboardingInput,
+): Promise<{ error: string } | void> {
+  const parsed = onboardingSchema.safeParse(values);
+  if (!parsed.success) return { error: "Champs invalides" };
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/login");
+
+  const v = parsed.data;
+  const { error } = await updateProfileById(supabase, user.id, {
+    username: v.username,
+    display_name: v.displayName,
+    first_name: nullify(v.firstName),
+    last_name: nullify(v.lastName),
+    city: nullify(v.city),
+    rules_accepted: true,
+    rules_accepted_at: new Date().toISOString(),
+    image_rights_consent: v.imageRightsConsent,
+    member_since: new Date().toISOString(),
+    onboarding_completed: true,
+  });
+
+  if (error) {
+    if (error.code === UNIQUE_VIOLATION)
+      return { error: "Ce nom d'utilisateur est deja pris" };
+    return { error: "Echec de l'enregistrement, reessaie" };
+  }
+
+  // Date de naissance dans profiles_private (PII).
+  await updateProfilePrivateById(supabase, user.id, {
+    birth_date: v.birthDate,
+  });
+
+  redirect("/espace-membre");
+}
+
+export async function updateProfile(
+  values: ProfileEditInput,
+): Promise<{ error?: string; ok?: boolean } | void> {
+  const parsed = profileEditSchema.safeParse(values);
+  if (!parsed.success) return { error: "Champs invalides" };
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/login");
+
+  const v = parsed.data;
+  const { error } = await updateProfileById(supabase, user.id, {
+    display_name: v.displayName,
+    bio: nullify(v.bio),
+    city: nullify(v.city),
+    favorite_manga: nullify(v.favoriteManga),
+    favorite_character: nullify(v.favoriteCharacter),
+  });
+
+  if (error) return { error: "Echec de l'enregistrement, reessaie" };
+  return { ok: true };
+}
