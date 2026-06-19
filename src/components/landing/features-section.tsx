@@ -11,7 +11,7 @@ import {
 } from "@/components/landing/feature-widgets";
 
 const LINEUP_URL =
-  "https://res.cloudinary.com/dkw8snibz/image/upload/v1773148066/TEL_APP_2_ejxnbu.png";
+  "https://res.cloudinary.com/dkw8snibz/image/upload/f_auto,q_auto,w_600/v1773148066/TEL_APP_2_ejxnbu.png";
 
 type Widget = "radar" | "lineup" | "coscard" | "quests";
 
@@ -99,7 +99,9 @@ function SlideWidget({ widget }: { widget: Widget }) {
     <img
       src={LINEUP_URL}
       alt="Visual Line-Up"
-      className="mx-auto max-h-[340px] w-full object-contain drop-shadow-2xl"
+      width={600}
+      height={750}
+      className="mx-auto max-h-[340px] w-auto object-contain drop-shadow-2xl"
     />
   );
 }

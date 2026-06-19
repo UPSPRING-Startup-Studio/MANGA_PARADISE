@@ -1,9 +1,9 @@
 "use server";
 
-import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { uuid } from "@/lib/validation";
 import {
   addLike,
   countPostLikes,
@@ -14,8 +14,6 @@ import {
   removeLike,
 } from "@/features/community/api/posts";
 import { commentSchema } from "@/features/community/schemas";
-
-const uuid = z.string().uuid();
 
 async function requireUserId(): Promise<string> {
   const supabase = await createClient();
@@ -66,9 +64,11 @@ export async function toggleLike(
     : await addLike(supabase, postId, userId);
   if (error) return { error: "Action impossible, réessaie" };
 
-  // Pas de revalidatePath : revalider la route courante réinitialiserait
-  // l'état local du bouton. L'UI est pilotée par la valeur renvoyée.
+  // Rafraîchit le feed / le détail. L'état du bouton est piloté côté client
+  // par la valeur renvoyée (le useState survit au re-render).
   const count = await countPostLikes(supabase, postId);
+  revalidatePath("/communaute");
+  revalidatePath(`/communaute/post/${postId}`);
   return { liked: !liked, count };
 }
 
