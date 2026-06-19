@@ -1,9 +1,9 @@
 "use server";
 
-import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { uuid } from "@/lib/validation";
 import {
   deletePlanById,
   insertPlan,
@@ -27,8 +27,6 @@ import {
   getPhotoById,
   insertPhoto,
 } from "@/features/cosplay/api/photos";
-
-const uuid = z.string().uuid();
 
 async function requireUserId(): Promise<string> {
   const supabase = await createClient();
