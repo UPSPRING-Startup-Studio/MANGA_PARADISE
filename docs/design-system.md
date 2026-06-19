@@ -4,16 +4,18 @@ Source : `src/app/globals.css`. Référence complète des utilitaires de l'ancie
 
 ## Couleurs de marque
 
-| Token                                   | Valeur               | Usage                          |
-| --------------------------------------- | -------------------- | ------------------------------ |
-| `--mp-primary`                          | `#DC1E44` (cinabre)  | couleur principale, CTA, liens |
-| `--mp-coral`                            | `#F25353`            | accent chaud                   |
-| `--mp-orange`                           | `#F7945B`            | accent chaud                   |
-| `--mp-saffron`                          | `#FFD15B`            | accent / highlights            |
-| `--mp-paper`                            | `#F8FBFF`            | fond clair par défaut          |
-| `--mp-cloud` / `--mp-sky` / `--mp-sand` | bleus clairs / sable | fonds de sections              |
-| `--mp-ink`                              | `#334155`            | texte principal                |
-| `--mp-night`                            | `#0F1B2D`            | fond sombre (Pro / Admin)      |
+| Token                                   | Valeur               | Usage                         |
+| --------------------------------------- | -------------------- | ----------------------------- |
+| `--mp-primary`                          | `#C70039` (crimson)  | couleur de marque, CTA, liens |
+| `--mp-coral`                            | `#F25353`            | accent chaud                  |
+| `--mp-orange`                           | `#F7945B`            | accent chaud                  |
+| `--mp-saffron`                          | `#FFD15B`            | accent / highlights           |
+| `--mp-paper`                            | `#F8FBFF`            | fond clair par défaut         |
+| `--mp-cloud` / `--mp-sky` / `--mp-sand` | bleus clairs / sable | fonds de sections             |
+| `--mp-ink`                              | `#334155`            | texte principal               |
+| `--mp-night`                            | `#0F1B2D`            | fond sombre (Pro / Admin)     |
+
+Persona (profils communautaires) : `--mp-otaku` `#E91E8C`, `--mp-cosplayer` `#9B59B6`, `--mp-gamer` `#27AE60`, `--mp-creatif` `#F39C12`, `--mp-sakura` `#E7A0A8`.
 
 Sémantiques : `--mp-success`, `--mp-warning`, `--mp-danger`, `--mp-info`, `--mp-violet`.
 

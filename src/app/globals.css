@@ -52,6 +52,11 @@
   --color-mp-coral: var(--mp-coral);
   --color-mp-orange: var(--mp-orange);
   --color-mp-saffron: var(--mp-saffron);
+  --color-mp-otaku: var(--mp-otaku);
+  --color-mp-cosplayer: var(--mp-cosplayer);
+  --color-mp-gamer: var(--mp-gamer);
+  --color-mp-creatif: var(--mp-creatif);
+  --color-mp-sakura: var(--mp-sakura);
   --color-mp-ink: var(--mp-ink);
   --color-mp-ink-soft: var(--mp-ink-soft);
   --color-mp-ink-muted: var(--mp-ink-muted);
@@ -79,11 +84,17 @@
 
 :root {
   /* === Marque (brand tokens) === */
-  --mp-primary: hsl(348 75% 49%); /* #DC1E44 */
-  --mp-primary-600: hsl(347 78% 41%);
+  --mp-primary: hsl(343 100% 39%); /* #C70039 (rouge de marque officiel) */
+  --mp-primary-600: hsl(343 100% 32%); /* pressé / hover sombre */
   --mp-coral: hsl(0 85% 64%); /* #F25353 */
   --mp-orange: hsl(19 92% 66%); /* #F7945B */
   --mp-saffron: hsl(42 100% 68%); /* #FFD15B */
+  /* Couleurs persona (profils communautaires) + sakura */
+  --mp-otaku: #e91e8c;
+  --mp-cosplayer: #9b59b6;
+  --mp-gamer: #27ae60;
+  --mp-creatif: #f39c12;
+  --mp-sakura: #e7a0a8;
   --mp-paper: hsl(212 100% 98%); /* #F8FBFF */
   --mp-cloud: hsl(213 100% 95%);
   --mp-sky: hsl(213 100% 86%);
@@ -189,5 +200,56 @@
     font-style: italic;
     letter-spacing: -0.01em;
     line-height: 1.05;
+  }
+}
+
+/* ============================================================
+   Animations décoratives (landing) — couleurs via tokens.
+   ============================================================ */
+@keyframes sakura-fall {
+  0% {
+    transform: translateY(-20px) rotate(0deg) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg) translateX(50px);
+    opacity: 0;
+  }
+}
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@keyframes glow-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 8px var(--mp-primary),
+      0 0 20px hsl(343 100% 39% / 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 16px var(--mp-primary),
+      0 0 40px hsl(343 100% 39% / 0.5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
