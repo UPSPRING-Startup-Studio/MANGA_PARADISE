@@ -6,7 +6,7 @@ import { User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const LOGO_URL =
-  "https://res.cloudinary.com/dkw8snibz/image/upload/v1768062945/Logo_Manga_Paradise_VIERGE_xhahrh.png";
+  "https://res.cloudinary.com/dkw8snibz/image/upload/f_auto,q_auto,w_240/v1768062945/Logo_Manga_Paradise_VIERGE_xhahrh.png";
 
 /**
  * Barre de navigation de la landing : transparente au-dessus du hero,
@@ -38,6 +38,8 @@ export function LandingNav({ isAuthed }: { isAuthed: boolean }) {
           <img
             src={LOGO_URL}
             alt="Manga Paradise"
+            width={240}
+            height={114}
             className={cn(
               "h-9 w-auto object-contain transition-all duration-300",
               !scrolled && "brightness-0 invert",
