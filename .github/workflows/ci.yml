@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main, staging, DEVELOPMENT]
+    branches: [main, staging, development]
   pull_request:
 
 # Annule les exécutions précédentes sur la même branche/PR.

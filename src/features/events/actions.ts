@@ -1,7 +1,6 @@
 "use server";
 
 import { z } from "zod";
-import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import {
@@ -24,7 +23,12 @@ async function requireUserId(): Promise<string> {
   return user.id;
 }
 
-/** Bascule la participation (RSVP) de l'utilisateur courant à un événement. */
+/**
+ * Bascule la participation (RSVP) de l'utilisateur courant à un événement.
+ * Pas de `revalidatePath` : les pages concernées sont dynamiques (relues à
+ * chaque navigation) et revalider la route courante réinitialiserait l'état
+ * local du bouton. La vérité renvoyée pilote l'UI côté client.
+ */
 export async function toggleParticipation(
   eventId: string,
 ): Promise<{ participating: boolean } | { error: string }> {
@@ -40,8 +44,6 @@ export async function toggleParticipation(
     : await addParticipation(supabase, userId, eventId);
   if (error) return { error: "Action impossible, réessaie" };
 
-  revalidatePath("/agenda");
-  revalidatePath(`/evenements/${eventId}`);
   return { participating: !already };
 }
 
@@ -61,7 +63,5 @@ export async function toggleFavorite(
     : await addFavoriteEvent(supabase, userId, eventId);
   if (error) return { error: "Action impossible, réessaie" };
 
-  revalidatePath("/agenda");
-  revalidatePath(`/evenements/${eventId}`);
   return { favorite: !already };
 }
