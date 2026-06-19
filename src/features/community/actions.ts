@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import {
   addLike,
+  countPostLikes,
   deletePostRow,
   insertComment,
   insertPost,
@@ -53,15 +54,22 @@ export async function deletePost(postId: string): Promise<void> {
   revalidatePath("/communaute");
 }
 
-export async function toggleLike(postId: string): Promise<void> {
-  if (!uuid.safeParse(postId).success) return;
+export async function toggleLike(
+  postId: string,
+): Promise<{ liked: boolean; count: number } | { error: string }> {
+  if (!uuid.safeParse(postId).success) return { error: "Post invalide" };
   const userId = await requireUserId();
   const supabase = await createClient();
   const liked = await isPostLiked(supabase, postId, userId);
-  if (liked) await removeLike(supabase, postId, userId);
-  else await addLike(supabase, postId, userId);
-  revalidatePath("/communaute");
-  revalidatePath(`/communaute/post/${postId}`);
+  const { error } = liked
+    ? await removeLike(supabase, postId, userId)
+    : await addLike(supabase, postId, userId);
+  if (error) return { error: "Action impossible, réessaie" };
+
+  // Pas de revalidatePath : revalider la route courante réinitialiserait
+  // l'état local du bouton. L'UI est pilotée par la valeur renvoyée.
+  const count = await countPostLikes(supabase, postId);
+  return { liked: !liked, count };
 }
 
 export async function addComment(

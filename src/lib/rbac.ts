@@ -113,6 +113,9 @@ const PUBLIC_PREFIXES = [
   "/register",
   "/auth", // callbacks OAuth, reset mot de passe
   "/legal",
+  "/mentions-legales", // pages légales accessibles sans session
+  "/confidentialite",
+  "/cgu",
   "/a/", // fiches association publiques
   "/u/", // profils publics
 ] as const;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useOptimistic, useTransition } from "react";
+import { type MouseEvent, useState, useTransition } from "react";
 import { Heart } from "lucide-react";
 import { toggleFavorite } from "@/features/events/actions";
 import { cn } from "@/lib/utils";
@@ -12,8 +12,19 @@ export function FavoriteButton({
   eventId: string;
   initial: boolean;
 }) {
-  const [fav, setFav] = useOptimistic(initial);
+  const [fav, setFav] = useState(initial);
   const [pending, startTransition] = useTransition();
+
+  function handleClick(e: MouseEvent) {
+    e.preventDefault();
+    const next = !fav;
+    setFav(next); // optimiste
+    startTransition(async () => {
+      const res = await toggleFavorite(eventId);
+      // Réconcilie avec la vérité serveur (revert si l'écriture a échoué).
+      setFav("error" in res ? !next : res.favorite);
+    });
+  }
 
   return (
     <button
@@ -21,13 +32,7 @@ export function FavoriteButton({
       aria-label={fav ? "Retirer des favoris" : "Ajouter aux favoris"}
       aria-pressed={fav}
       disabled={pending}
-      onClick={(e) => {
-        e.preventDefault();
-        startTransition(async () => {
-          setFav(!fav);
-          await toggleFavorite(eventId);
-        });
-      }}
+      onClick={handleClick}
       className={cn(
         "grid size-8 place-items-center rounded-full border transition-colors",
         fav

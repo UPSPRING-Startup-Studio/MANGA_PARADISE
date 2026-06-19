@@ -180,6 +180,17 @@ export async function isPostLiked(
   return Boolean(data);
 }
 
+export async function countPostLikes(
+  supabase: SupabaseClient<Database>,
+  postId: string,
+): Promise<number> {
+  const { count } = await supabase
+    .from("post_likes")
+    .select("*", { count: "exact", head: true })
+    .eq("post_id", postId);
+  return count ?? 0;
+}
+
 export function addLike(
   supabase: SupabaseClient<Database>,
   postId: string,
