@@ -11,8 +11,8 @@ export const config = {
     /*
      * Toutes les routes sauf :
      * - assets statiques Next (_next/static, _next/image)
-     * - favicon et fichiers image
+     * - favicon, fichiers image, et fichiers texte racine (robots/sitemap/llms)
      */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|txt|xml)$).*)",
   ],
 };
