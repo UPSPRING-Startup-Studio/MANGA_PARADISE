@@ -2,9 +2,11 @@
 
 import { useState, useTransition } from "react";
 import Link from "next/link";
+import { AnimatePresence, m } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { useRole } from "@/features/auth/hooks/use-role";
 import { signOut } from "@/features/auth/actions";
+import { MotionProvider } from "@/components/motion-provider";
 import { cn } from "@/lib/utils";
 
 const BASE_LINKS = [
@@ -79,29 +81,39 @@ export function AppNav() {
         {open ? <X className="size-6" /> : <Menu className="size-6" />}
       </button>
 
-      {/* Mobile : panneau */}
-      {open && (
-        <div className="border-border bg-card absolute inset-x-0 top-14 z-50 flex flex-col gap-1 border-b p-3 shadow-lg md:hidden">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="hover:bg-muted rounded-lg px-3 py-2.5 text-sm font-medium"
+      {/* Mobile : panneau (enter/exit via AnimatePresence) */}
+      <MotionProvider>
+        <AnimatePresence>
+          {open && (
+            <m.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="border-border bg-card absolute inset-x-0 top-14 z-50 flex flex-col gap-1 border-b p-3 shadow-lg md:hidden"
             >
-              {l.label}
-            </Link>
-          ))}
-          <button
-            type="button"
-            disabled={pending}
-            onClick={doSignOut}
-            className="text-muted-foreground hover:bg-muted rounded-lg px-3 py-2.5 text-left text-sm font-medium"
-          >
-            Déconnexion
-          </button>
-        </div>
-      )}
+              {links.map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="hover:bg-muted rounded-lg px-3 py-2.5 text-sm font-medium"
+                >
+                  {l.label}
+                </Link>
+              ))}
+              <button
+                type="button"
+                disabled={pending}
+                onClick={doSignOut}
+                className="text-muted-foreground hover:bg-muted rounded-lg px-3 py-2.5 text-left text-sm font-medium"
+              >
+                Déconnexion
+              </button>
+            </m.div>
+          )}
+        </AnimatePresence>
+      </MotionProvider>
     </>
   );
 }
